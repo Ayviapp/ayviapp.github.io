@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ayvi — birga bo'lish uchun messenjer</title>
+<meta name="description" content="Ayvi: do'stlar va yaqinlar bilan suhbat, ovozli xabar, qo'ng'iroq, guruh va kanallar, Pichir sun'iy intellekt yordamchisi. O'zbek, rus va ingliz tilida. Android uchun yuklab oling.">
+<meta name="theme-color" content="#070d20">
+<link rel="canonical" href="https://ayviapp.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ayvi">
+<meta property="og:title" content="Ayvi — shunchaki chat emas">
+<meta property="og:description" content="Suhbat, ovozli xabar, qo'ng'iroq, guruh va kanallar, Pichir yordamchisi. O'zbek, rus, ingliz tilida. Android uchun.">
+<meta property="og:image" content="https://ayviapp.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ayviapp.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ayviapp.github.io/og.png">
+<link rel="icon" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;600&display=swap">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Ayvi","applicationCategory":"CommunicationApplication","operatingSystem":"Android","softwareVersion":"A1","downloadUrl":"https://ayviapp.github.io/Ayvi.apk","image":"https://ayviapp.github.io/og.png","inLanguage":["uz","ru","en"]}</script>
+<style>
+:root{
+  --bg:#070d20;--bg2:#0c1a3f;--ink:#f3f7ff;--mut:#9db3dc;--acc:#3b8cff;--acc2:#5cc8ff;--pink:#ec4882;
+  --card:rgba(255,255,255,.06);--card2:rgba(255,255,255,.1);--line:rgba(255,255,255,.12);
+  --font:'Onest',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;--logo:'Unbounded','Onest',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--ink);font:16px/1.55 var(--font);background:var(--bg);overflow-x:clip;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(1200px 700px at 80% -10%,#15347a 0%,transparent 60%),radial-gradient(900px 600px at -10% 30%,#0e2a66 0%,transparent 60%),linear-gradient(180deg,var(--bg),#050a18)}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
+.sr{position:absolute;left:-9999px}
+:focus-visible{outline:2px solid var(--acc2);outline-offset:3px;border-radius:8px}
+
+/* yuqori panel */
+.top{position:sticky;top:0;z-index:30;background:rgba(7,13,32,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:14px;height:62px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:600 19px var(--logo);letter-spacing:-.02em}
+.brand img{width:34px;height:34px;border-radius:10px}
+.nav{margin-left:auto;display:flex;align-items:center;gap:4px}
+.nav a.l{padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--mut);font-weight:500;font-size:15px}
+.nav a.l:hover{color:var(--ink);background:var(--card)}
+.lang{display:flex;gap:2px;padding:3px;border-radius:12px;background:var(--card);border:1px solid var(--line);margin-left:6px}
+.lang button{border:0;background:none;color:var(--mut);font:600 12.5px var(--font);padding:6px 9px;border-radius:9px;cursor:pointer;letter-spacing:.03em}
+.lang button[aria-pressed="true"]{background:var(--acc);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-weight:700;border-radius:999px;border:0;cursor:pointer;font-family:var(--font);transition:transform .15s,box-shadow .2s,background .2s}
+.btn.sm{padding:9px 16px;font-size:14.5px;background:var(--acc);color:#fff}
+.btn.sm:hover{background:#2f7be8}
+.btn.big{padding:16px 30px;font-size:18px;min-height:58px;background:linear-gradient(180deg,#5aa6ff,#2f7be8);color:#fff;box-shadow:0 12px 34px -6px rgba(59,140,255,.65),0 1px 0 rgba(255,255,255,.35) inset}
+.btn.big:hover{transform:translateY(-2px);box-shadow:0 18px 40px -6px rgba(59,140,255,.75),0 1px 0 rgba(255,255,255,.35) inset}
+.btn.big:active{transform:translateY(0)}
+.btn svg{width:22px;height:22px;flex:none}
+@media (max-width:760px){.nav a.l{display:none}.top .wrap{gap:8px}.btn.sm{padding:8px 13px}}
+
+/* hero */
+.hero{padding:44px 0 30px}
+.hero .wrap{display:grid;gap:34px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--acc2);font-weight:600;font-size:13.5px}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--acc2);box-shadow:0 0 12px var(--acc2)}
+h1{margin:16px 0 14px;font:600 clamp(32px,6.4vw,58px)/1.08 var(--logo);letter-spacing:-.03em}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--acc2),var(--acc) 60%,#9b7bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin:0 0 26px;color:var(--mut);font-size:clamp(16px,2.2vw,19px);max-width:34em}
+.cta{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.meta{color:var(--mut);font-size:14px;display:flex;flex-wrap:wrap;gap:6px 14px}
+.meta b{color:var(--ink);font-weight:600}
+.hint{margin:0;color:var(--mut);font-size:13.5px;max-width:30em}
+.stage{position:relative;display:grid;place-items:center;min-height:420px}
+.stage::before{content:"";position:absolute;width:min(520px,100%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(59,140,255,.42),transparent 66%);filter:blur(30px)}
+.stage .ph{position:relative}
+.stage .ph.a{width:min(250px,58vw);z-index:2;transform:rotate(-3deg) translateX(-26%)}
+.stage .ph.b{width:min(230px,52vw);position:absolute;right:50%;top:50%;transform:translate(78%,-46%) rotate(5deg);z-index:1;opacity:.96}
+@media (min-width:900px){
+  .hero{padding:64px 0 40px}
+  .hero .wrap{grid-template-columns:1.05fr .95fr;gap:20px}
+  .stage{min-height:560px}
+  .stage .ph.a{width:270px}.stage .ph.b{width:250px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .stage .ph.a{animation:fl 7s ease-in-out infinite}
+  .stage .ph.b{animation:fl2 8s ease-in-out infinite}
+  @keyframes fl{0%,100%{transform:rotate(-3deg) translate(-26%,0)}50%{transform:rotate(-3deg) translate(-26%,-10px)}}
+  @keyframes fl2{0%,100%{transform:translate(78%,-46%) rotate(5deg)}50%{transform:translate(78%,-50%) rotate(5deg)}}
+}
+
+/* telefon ramkasi */
+.ph{aspect-ratio:720/1560;border-radius:34px;padding:7px;background:linear-gradient(160deg,#2a3a63,#10172f);box-shadow:0 30px 60px -20px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.16) inset,0 0 0 1px rgba(0,0,0,.4)}
+.ph .scr{width:100%;height:100%;border-radius:28px;overflow:hidden;background:#0b121a;position:relative}
+.ph .scr img{width:100%;height:100%;object-fit:cover}
+.ph .scr::after{content:"";position:absolute;top:9px;left:50%;width:30%;height:5px;border-radius:5px;background:rgba(0,0,0,.55);transform:translateX(-50%)}
+
+/* bo'limlar */
+section{padding:54px 0;scroll-margin-top:60px}
+.head{max-width:36em;margin:0 0 30px}
+.head h2{margin:0 0 10px;font:600 clamp(26px,4.4vw,38px)/1.15 var(--logo);letter-spacing:-.02em}
+.head p{margin:0;color:var(--mut);font-size:17px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.fc{padding:20px;border-radius:20px;background:var(--card);border:1px solid var(--line);transition:transform .2s,border-color .2s,background .2s}
+.fc:hover{transform:translateY(-3px);border-color:rgba(92,200,255,.45);background:var(--card2)}
+.fc .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:23px;margin-bottom:14px;background:var(--c);box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 18px -8px var(--c)}
+.fc b{display:block;font-size:17px;margin-bottom:4px}
+.fc span{display:block;color:var(--mut);font-size:14.5px;line-height:1.45}
+
+@media (max-width:600px){
+  section{padding:40px 0}
+  .grid{grid-template-columns:1fr 1fr;gap:10px}
+  .fc{padding:14px}.fc .ic{width:40px;height:40px;font-size:20px;margin-bottom:10px}.fc b{font-size:15px}.fc span{font-size:13.2px}
+  .stage{min-height:380px}
+}
+/* galereya */
+.gal-wrap{position:relative}
+.gal{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 20px 26px;margin:0 -20px;scrollbar-width:none}
+.gal::-webkit-scrollbar{display:none}
+.gal figure{margin:0;flex:none;width:min(220px,58vw);scroll-snap-align:center;text-align:center}
+.gal figcaption{margin-top:14px;color:var(--mut);font-size:14.5px;font-weight:500}
+.arr{display:none;position:absolute;top:42%;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(12,26,63,.85);color:#fff;cursor:pointer;z-index:3;place-items:center;font-size:20px}
+.arr:hover{background:var(--acc)}
+.arr.p{left:-14px}.arr.n{right:-14px}
+@media (hover:hover) and (min-width:900px){.arr{display:grid}}
+
+/* o'rnatish */
+.inst{display:grid;gap:26px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.steps li::before{content:counter(s);flex:none;width:34px;height:34px;border-radius:50%;background:linear-gradient(180deg,#5aa6ff,#2f7be8);display:grid;place-items:center;font-weight:700}
+.steps b{display:block}
+.steps span{color:var(--mut);font-size:15px}
+.side{display:grid;gap:14px;align-content:start}
+.note{padding:14px 16px;border-radius:16px;background:rgba(255,200,80,.09);border:1px solid rgba(255,200,80,.28);color:#ffe7b0;font-size:14.5px}
+.qrc{display:none;padding:20px;border-radius:20px;background:var(--card);border:1px solid var(--line);text-align:center}
+.qrc canvas{width:170px;height:170px;border-radius:14px;background:#fff;padding:7px;image-rendering:pixelated;margin:0 auto}
+.qrc p{margin:10px 0 0;color:var(--mut);font-size:14px}
+@media (min-width:860px){.inst{grid-template-columns:1.3fr .7fr}.qrc{display:block}}
+.invite{margin:0 0 22px;padding:18px;border-radius:20px;background:linear-gradient(135deg,rgba(59,140,255,.35),rgba(236,72,130,.22));border:1px solid var(--line);text-align:center}
+.invite b{display:block;margin-bottom:6px}
+.invite .id{font:800 30px var(--font);letter-spacing:.12em;font-variant-numeric:tabular-nums}
+.invite p{margin:6px 0 12px;color:#d6e4ff;font-size:14.5px}
+.cp{border:0;background:rgba(255,255,255,.2);color:#fff;font:600 15px var(--font);padding:9px 20px;border-radius:999px;cursor:pointer}
+
+/* maxfiylik + pastki */
+.priv{padding:22px;border-radius:22px;background:var(--card);border:1px solid var(--line);display:grid;gap:8px}
+.priv h3{margin:0;font-size:19px}
+.priv p{margin:0;color:var(--mut);font-size:15px}
+.final{text-align:center;padding:70px 0 60px}
+.final .logo{width:84px;height:84px;border-radius:22px;margin:0 auto 18px;box-shadow:0 18px 40px -12px rgba(59,140,255,.7)}
+.final h2{margin:0 0 20px;font:600 clamp(26px,4.4vw,40px)/1.15 var(--logo);letter-spacing:-.02em}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--mut);font-size:13.5px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+
+/* paydo bo'lish */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Ayvi"><img src="logo.png" alt="" width="34" height="34"><span>Ayvi</span></a>
+    <nav class="nav" aria-label="Asosiy">
+      <a class="l" href="#features" data-i="nav_f">Imkoniyatlar</a>
+      <a class="l" href="#screens" data-i="nav_s">Rasmlar</a>
+      <a class="l" href="#install" data-i="nav_i">O'rnatish</a>
+      <div class="lang" role="group" aria-label="Til / Language">
+        <button type="button" data-lang="uz" aria-pressed="true">UZ</button>
+        <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn sm" href="Ayvi.apk" download data-i="nav_dl">Yuklab olish</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow"><i></i><span><span data-i="eyebrow">Yangi versiya</span> <b data-ver>A1</b></span></span>
+        <h1 data-i="h1" data-h>Shunchaki chat emas. <em>Birga bo'lish</em> ilovasi.</h1>
+        <p class="sub" data-i="sub">Ayvi: do'stlar va yaqinlar bilan suhbat, ovozli xabar, qo'ng'iroq, guruh va kanallar. O'zbek, rus va ingliz tilida.</p>
+        <div class="cta">
+          <a class="btn big" id="dl" href="Ayvi.apk" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+            <span data-i="dl">Android uchun yuklab olish</span>
+          </a>
+          <div class="meta"><span><span data-i="ver">Versiya</span> <b data-ver>A1</b></span><span>APK · ~5 MB</span><span>Android</span></div>
+          <p class="hint" data-i="hint">Ayvi Google Play'da hali yo'q. Fayl to'g'ridan-to'g'ri shu sahifadan yuklanadi.</p>
+        </div>
+      </div>
+      <div class="stage" aria-hidden="false">
+        <div class="ph b"><div class="scr"><img src="shots/chat.webp" width="720" height="1560" alt="" data-i-alt="alt_chat" decoding="async"></div></div>
+        <div class="ph a"><div class="scr"><img src="shots/chats.webp" width="720" height="1560" alt="" data-i-alt="alt_chats" fetchpriority="high"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="head rv"><h2 data-i="f_h">Kerakli hamma narsa bir joyda</h2><p data-i="f_p">Oddiy yozishmadan tortib kanallar va sun'iy intellekt yordamchisigacha.</p></div>
+      <div class="grid">
+        <div class="fc rv" style="--c:#475569"><div class="ic">🕶️</div><b data-i="f1t">Maxfiy chatlar</b><span data-i="f1d">Alohida PIN bilan yashiriladi. Ilova qulfi: PIN yoki barmoq izi.</span></div>
+        <div class="fc rv" style="--c:#10b981"><div class="ic">👥</div><b data-i="f2t">Guruhlar va kanallar</b><span data-i="f2d">Do'stlar guruhini yoki ko'pchilik o'qiydigan kanalni yarating.</span></div>
+        <div class="fc rv" style="--c:#3b82f6"><div class="ic">📞</div><b data-i="f3t">Ovozli va video qo'ng'iroq</b><span data-i="f3d">To'g'ridan-to'g'ri ilova ichida, boshqa dastur kerak emas.</span></div>
+        <div class="fc rv" style="--c:#ef4444"><div class="ic">🎙️</div><b data-i="f4t">Ovozli xabar</b><span data-i="f4d">Bosib turing va gapiring. Tinglash tezligini o'zingiz tanlang.</span></div>
+        <div class="fc rv" style="--c:#f59e0b"><div class="ic">😊</div><b data-i="f5t">Stiker va GIF</b><span data-i="f5d">Tayyor stikerlar, GIF va o'zingiz yasagan stikerlar.</span></div>
+        <div class="fc rv" style="--c:#8b5cf6"><div class="ic">🕊️</div><b data-i="f6t">Pichir yordamchisi</b><span data-i="f6d">Sun'iy intellekt: tarjima, javob taklifi va savollarga javob.</span></div>
+        <div class="fc rv" style="--c:#14b8a6"><div class="ic">🕓</div><b data-i="f7t">Keyinroq yuborish</b><span data-i="f7d">Xabarni yozing, vaqtni tanlang. Belgilangan paytda yuboriladi.</span></div>
+        <div class="fc rv" style="--c:#06b6d4"><div class="ic">🗄️</div><b data-i="f8t">Arxiv</b><span data-i="f8d">Kerak bo'lmagan chatlarni o'chirmasdan ro'yxatdan yashiring.</span></div>
+        <div class="fc rv" style="--c:#eab308"><div class="ic">🔖</div><b data-i="f9t">Saqlangan xabarlar</b><span data-i="f9d">Muhim xabar, havola va eslatmalarni bir joyda saqlang.</span></div>
+        <div class="fc rv" style="--c:#2477e0"><div class="ic">🌐</div><b data-i="f10t">Uch tilda</b><span data-i="f10d">O'zbek, rus va ingliz. Tilni bir bosishda almashtirasiz.</span></div>
+        <div class="fc rv" style="--c:#ec4899"><div class="ic">🎨</div><b data-i="f11t">Qorong'u va yorug' mavzu</b><span data-i="f11d">O'zingiz tanlagan rang, mavzu, fon va xabar shakli.</span></div>
+        <div class="fc rv" style="--c:#f97316"><div class="ic">💗</div><b data-i="f12t">Birga bo'lish</b><span data-i="f12d">Yurak yuborish, birga chizish va kelajakka vaqt kapsulasi.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <div class="wrap">
+      <div class="head rv"><h2 data-i="s_h">Ilova ichidan</h2><p data-i="s_p">Haqiqiy ilovaning ko'rinishi. Surib ko'ring.</p></div>
+      <div class="gal-wrap rv">
+        <button class="arr p" type="button" aria-label="←" id="gp">‹</button>
+        <button class="arr n" type="button" aria-label="→" id="gn">›</button>
+        <div class="gal" id="gal">
+          <figure><div class="ph"><div class="scr"><img src="shots/chats.webp" width="720" height="1560" alt="" data-i-alt="alt_chats" loading="lazy"></div></div><figcaption data-i="c1">Suhbatlar</figcaption></figure>
+          <figure><div class="ph"><div class="scr"><img src="shots/chat.webp" width="720" height="1560" alt="" data-i-alt="alt_chat" loading="lazy"></div></div><figcaption data-i="c2">Yozishma</figcaption></figure>
+          <figure><div class="ph"><div class="scr"><img src="shots/pichir.webp" width="720" height="1560" alt="" data-i-alt="alt_pichir" loading="lazy"></div></div><figcaption data-i="c3">Pichir yordamchisi</figcaption></figure>
+          <figure><div class="ph"><div class="scr"><img src="shots/settings.webp" width="720" height="1560" alt="" data-i-alt="alt_set" loading="lazy"></div></div><figcaption data-i="c4">Sozlamalar</figcaption></figure>
+          <figure><div class="ph"><div class="scr"><img src="shots/theme.webp" width="720" height="1560" alt="" data-i-alt="alt_theme" loading="lazy"></div></div><figcaption data-i="c5">Ko'rinish</figcaption></figure>
+          <figure><div class="ph"><div class="scr"><img src="shots/light.webp" width="720" height="1560" alt="" data-i-alt="alt_light" loading="lazy"></div></div><figcaption data-i="c6">Yorug' mavzu</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap">
+      <div class="head rv"><h2 data-i="i_h">O'rnatish: 3 qadam</h2><p data-i="i_p">Bir daqiqa ham ketmaydi.</p></div>
+      <div class="invite rv" id="invite" hidden>
+        <b data-i="inv_t">Sizni do'stingiz taklif qildi</b>
+        <div class="id" id="inviteId"></div>
+        <p data-i="inv_p">Ro'yxatdan o'tayotganda «Taklif ID» joyiga shu ID ni yozing. Chatingiz o'zi ochiladi.</p>
+        <button class="cp" id="cp" type="button" data-i="inv_b">ID ni nusxalash</button>
+      </div>
+      <div class="inst">
+        <ol class="steps rv">
+          <li><div><b data-i="st1t">Yuklab oling</b><span data-i="st1d">«Android uchun yuklab olish» tugmasini bosing. Fayl telefoningizga tushadi.</span></div></li>
+          <li><div><b data-i="st2t">Ruxsat bering</b><span data-i="st2d">Faylni oching. Telefon «noma'lum manbadan o'rnatish»ga ruxsat so'rasa, ruxsat bering.</span></div></li>
+          <li><div><b data-i="st3t">Oching</b><span data-i="st3d">Ayvi'ni oching, ro'yxatdan o'ting va do'stingizni ismi yoki ID si bo'yicha toping.</span></div></li>
+        </ol>
+        <div class="side rv">
+          <div class="note" data-i="note">Ayvi hozircha Google Play'da yo'q. Bu faylni faqat shu sahifadan yuklang. Keyingi yangilanishlar ilovaning o'zida chiqadi.</div>
+          <div class="qrc" id="desk"><canvas id="qr" width="170" height="170" aria-label="QR"></canvas><p data-i="qr">Kompyuterdan kirdingizmi? Telefon kamerasi bilan o'qing.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="priv rv">
+        <h3 data-i="p_h">Maxfiylik</h3>
+        <p data-i="p_p">Chatni faqat unga a'zo bo'lganlar ko'ra oladi. Qo'shimcha himoya uchun ilova qulfi (PIN yoki barmoq izi) va alohida PIN bilan yashiriladigan maxfiy chatlar bor. To'liq maxfiylik siyosati Google Play'ga chiqishdan oldin shu sahifada e'lon qilinadi.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap rv">
+      <img class="logo" src="logo.png" alt="Ayvi" width="84" height="84">
+      <h2 data-i="fin">Do'stlaringiz Ayvi'da kutyapti</h2>
+      <a class="btn big" href="Ayvi.apk" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+        <span data-i="dl">Android uchun yuklab olish</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ayvi · <span data-i="ver">Versiya</span> <span data-ver>A1</span></span>
+    <span data-i="foot">Birga bo'lish uchun messenjer</span>
+  </div>
+</footer>
+
+<script type="module">
+import { drawQr } from './qr.js';
+
+const VERSION = 'A1'; // yangi versiya chiqqanda faqat shu yerni va HTML dagi "A1" ni almashtiring
+document.querySelectorAll('[data-ver]').forEach((e) => { e.textContent = VERSION; });
+
+/* ---------- tillar ---------- */
+const T = {
+  uz: {
+    title: "Ayvi — birga bo'lish uchun messenjer",
+    desc: "Ayvi: do'stlar va yaqinlar bilan suhbat, ovozli xabar, qo'ng'iroq, guruh va kanallar, Pichir sun'iy intellekt yordamchisi. O'zbek, rus va ingliz tilida. Android uchun yuklab oling.",
+    nav_f: "Imkoniyatlar", nav_s: "Rasmlar", nav_i: "O'rnatish", nav_dl: "Yuklab olish",
+    eyebrow: "Yangi versiya", ver: "Versiya",
+    h1: "Shunchaki chat emas. <em>Birga bo'lish</em> ilovasi.",
+    sub: "Ayvi: do'stlar va yaqinlar bilan suhbat, ovozli xabar, qo'ng'iroq, guruh va kanallar. O'zbek, rus va ingliz tilida.",
+    dl: "Android uchun yuklab olish",
+    hint: "Ayvi Google Play'da hali yo'q. Fayl to'g'ridan-to'g'ri shu sahifadan yuklanadi.",
+    f_h: "Kerakli hamma narsa bir joyda", f_p: "Oddiy yozishmadan tortib kanallar va sun'iy intellekt yordamchisigacha.",
+    f1t: "Maxfiy chatlar", f1d: "Alohida PIN bilan yashiriladi. Ilova qulfi: PIN yoki barmoq izi.",
+    f2t: "Guruhlar va kanallar", f2d: "Do'stlar guruhini yoki ko'pchilik o'qiydigan kanalni yarating.",
+    f3t: "Ovozli va video qo'ng'iroq", f3d: "To'g'ridan-to'g'ri ilova ichida, boshqa dastur kerak emas.",
+    f4t: "Ovozli xabar", f4d: "Bosib turing va gapiring. Tinglash tezligini o'zingiz tanlang.",
+    f5t: "Stiker va GIF", f5d: "Tayyor stikerlar, GIF va o'zingiz yasagan stikerlar.",
+    f6t: "Pichir yordamchisi", f6d: "Sun'iy intellekt: tarjima, javob taklifi va savollarga javob.",
+    f7t: "Keyinroq yuborish", f7d: "Xabarni yozing, vaqtni tanlang. Belgilangan paytda yuboriladi.",
+    f8t: "Arxiv", f8d: "Kerak bo'lmagan chatlarni o'chirmasdan ro'yxatdan yashiring.",
+    f9t: "Saqlangan xabarlar", f9d: "Muhim xabar, havola va eslatmalarni bir joyda saqlang.",
+    f10t: "Uch tilda", f10d: "O'zbek, rus va ingliz. Tilni bir bosishda almashtirasiz.",
+    f11t: "Qorong'u va yorug' mavzu", f11d: "O'zingiz tanlagan rang, mavzu, fon va xabar shakli.",
+    f12t: "Birga bo'lish", f12d: "Yurak yuborish, birga chizish va kelajakka vaqt kapsulasi.",
+    s_h: "Ilova ichidan", s_p: "Haqiqiy ilovaning ko'rinishi. Surib ko'ring.",
+    c1: "Suhbatlar", c2: "Yozishma", c3: "Pichir yordamchisi", c4: "Sozlamalar", c5: "Ko'rinish", c6: "Yorug' mavzu",
+    alt_chats: "Ayvi suhbatlar ro'yxati", alt_chat: "Ayvi yozishma oynasi", alt_pichir: "Pichir yordamchisi bilan suhbat", alt_set: "Ayvi sozlamalari", alt_theme: "Ko'rinish sozlamalari: mavzu va rang", alt_light: "Yorug' mavzudagi guruh chati",
+    i_h: "O'rnatish: 3 qadam", i_p: "Bir daqiqa ham ketmaydi.",
+    inv_t: "Sizni do'stingiz taklif qildi", inv_p: "Ro'yxatdan o'tayotganda «Taklif ID» joyiga shu ID ni yozing. Chatingiz o'zi ochiladi.", inv_b: "ID ni nusxalash", inv_ok: "Nusxalandi ✓", inv_no: "ID ni qo'lda belgilang",
+    st1t: "Yuklab oling", st1d: "«Android uchun yuklab olish» tugmasini bosing. Fayl telefoningizga tushadi.",
+    st2t: "Ruxsat bering", st2d: "Faylni oching. Telefon «noma'lum manbadan o'rnatish»ga ruxsat so'rasa, ruxsat bering.",
+    st3t: "Oching", st3d: "Ayvi'ni oching, ro'yxatdan o'ting va do'stingizni ismi yoki ID si bo'yicha toping.",
+    note: "Ayvi hozircha Google Play'da yo'q. Bu faylni faqat shu sahifadan yuklang. Keyingi yangilanishlar ilovaning o'zida chiqadi.",
+    qr: "Kompyuterdan kirdingizmi? Telefon kamerasi bilan o'qing.",
+    p_h: "Maxfiylik", p_p: "Chatni faqat unga a'zo bo'lganlar ko'ra oladi. Qo'shimcha himoya uchun ilova qulfi (PIN yoki barmoq izi) va alohida PIN bilan yashiriladigan maxfiy chatlar bor. To'liq maxfiylik siyosati Google Play'ga chiqishdan oldin shu sahifada e'lon qilinadi.",
+    fin: "Do'stlaringiz Ayvi'da kutyapti", foot: "Birga bo'lish uchun messenjer"
+  },
+  ru: {
+    title: "Ayvi — мессенджер, чтобы быть вместе",
+    desc: "Ayvi: общение с друзьями и близкими, голосовые сообщения, звонки, группы и каналы, ИИ-помощник Пичир. На узбекском, русском и английском. Скачайте для Android.",
+    nav_f: "Возможности", nav_s: "Скриншоты", nav_i: "Установка", nav_dl: "Скачать",
+    eyebrow: "Новая версия", ver: "Версия",
+    h1: "Не просто чат. Приложение, чтобы <em>быть вместе</em>.",
+    sub: "Ayvi: общение с друзьями и близкими, голосовые сообщения, звонки, группы и каналы. На узбекском, русском и английском.",
+    dl: "Скачать для Android",
+    hint: "Ayvi пока нет в Google Play. Файл скачивается прямо с этой страницы.",
+    f_h: "Всё нужное в одном месте", f_p: "От обычной переписки до каналов и ИИ-помощника.",
+    f1t: "Секретные чаты", f1d: "Скрываются отдельным PIN-кодом. Блокировка приложения: PIN или отпечаток пальца.",
+    f2t: "Группы и каналы", f2d: "Создайте группу друзей или канал, который читают многие.",
+    f3t: "Голосовые и видеозвонки", f3d: "Прямо в приложении, без сторонних программ.",
+    f4t: "Голосовые сообщения", f4d: "Удерживайте и говорите. Скорость прослушивания выбираете сами.",
+    f5t: "Стикеры и GIF", f5d: "Готовые стикеры, GIF и стикеры, созданные вами.",
+    f6t: "Помощник Пичир", f6d: "Искусственный интеллект: перевод, подсказки для ответа и ответы на вопросы.",
+    f7t: "Отправка позже", f7d: "Напишите сообщение и выберите время. Оно уйдёт в назначенный момент.",
+    f8t: "Архив", f8d: "Скрывайте ненужные чаты из списка, не удаляя их.",
+    f9t: "Сохранённые сообщения", f9d: "Важные сообщения, ссылки и заметки в одном месте.",
+    f10t: "Три языка", f10d: "Узбекский, русский и английский. Язык меняется одним нажатием.",
+    f11t: "Тёмная и светлая тема", f11d: "Свой цвет, тема, фон и форма сообщений.",
+    f12t: "Быть вместе", f12d: "Отправка сердечка, совместное рисование и капсула времени в будущее.",
+    s_h: "Внутри приложения", s_p: "Так выглядит настоящее приложение. Листайте.",
+    c1: "Чаты", c2: "Переписка", c3: "Помощник Пичир", c4: "Настройки", c5: "Внешний вид", c6: "Светлая тема",
+    alt_chats: "Список чатов Ayvi", alt_chat: "Окно переписки Ayvi", alt_pichir: "Беседа с помощником Пичир", alt_set: "Настройки Ayvi", alt_theme: "Настройки внешнего вида: тема и цвет", alt_light: "Групповой чат в светлой теме",
+    i_h: "Установка: 3 шага", i_p: "Не займёт и минуты.",
+    inv_t: "Вас пригласил друг", inv_p: "При регистрации впишите этот ID в поле «ID приглашения». Чат откроется сам.", inv_b: "Скопировать ID", inv_ok: "Скопировано ✓", inv_no: "Выделите ID вручную",
+    st1t: "Скачайте", st1d: "Нажмите «Скачать для Android». Файл сохранится на телефоне.",
+    st2t: "Разрешите", st2d: "Откройте файл. Если телефон попросит разрешить установку из неизвестных источников, разрешите.",
+    st3t: "Откройте", st3d: "Запустите Ayvi, зарегистрируйтесь и найдите друга по имени или ID.",
+    note: "Ayvi пока нет в Google Play. Скачивайте файл только с этой страницы. Дальнейшие обновления приходят в самом приложении.",
+    qr: "Зашли с компьютера? Наведите камеру телефона.",
+    p_h: "Конфиденциальность", p_p: "Чат видят только его участники. Для дополнительной защиты есть блокировка приложения (PIN или отпечаток) и секретные чаты, скрытые отдельным PIN-кодом. Полная политика конфиденциальности будет опубликована на этой странице до выхода в Google Play.",
+    fin: "Ваши друзья уже в Ayvi", foot: "Мессенджер, чтобы быть вместе"
+  },
+  en: {
+    title: "Ayvi — a messenger for being together",
+    desc: "Ayvi: chat with friends and family, voice messages, calls, groups and channels, and the Pichir AI assistant. In Uzbek, Russian and English. Download for Android.",
+    nav_f: "Features", nav_s: "Screenshots", nav_i: "Install", nav_dl: "Download",
+    eyebrow: "New version", ver: "Version",
+    h1: "Not just a chat. An app for <em>being together</em>.",
+    sub: "Ayvi: chat with friends and family, voice messages, calls, groups and channels. In Uzbek, Russian and English.",
+    dl: "Download for Android",
+    hint: "Ayvi is not on Google Play yet. The file downloads straight from this page.",
+    f_h: "Everything you need in one place", f_p: "From simple messaging to channels and an AI assistant.",
+    f1t: "Secret chats", f1d: "Hidden behind a separate PIN. App lock with PIN or fingerprint.",
+    f2t: "Groups and channels", f2d: "Create a group of friends or a channel that many people read.",
+    f3t: "Voice and video calls", f3d: "Right inside the app, no extra software needed.",
+    f4t: "Voice messages", f4d: "Hold and speak. Choose your own playback speed.",
+    f5t: "Stickers and GIFs", f5d: "Ready-made stickers, GIFs and stickers you make yourself.",
+    f6t: "Pichir assistant", f6d: "Artificial intelligence: translation, reply suggestions and answers to questions.",
+    f7t: "Send later", f7d: "Write a message and pick a time. It is sent at the moment you chose.",
+    f8t: "Archive", f8d: "Hide chats you don't need from the list without deleting them.",
+    f9t: "Saved messages", f9d: "Keep important messages, links and notes in one place.",
+    f10t: "Three languages", f10d: "Uzbek, Russian and English. Switch with a single tap.",
+    f11t: "Dark and light theme", f11d: "Your own colour, theme, background and message shape.",
+    f12t: "Being together", f12d: "Send a heart, draw together and leave a time capsule for the future.",
+    s_h: "Inside the app", s_p: "This is how the real app looks. Swipe through.",
+    c1: "Chats", c2: "Conversation", c3: "Pichir assistant", c4: "Settings", c5: "Appearance", c6: "Light theme",
+    alt_chats: "Ayvi chat list", alt_chat: "Ayvi conversation screen", alt_pichir: "Conversation with the Pichir assistant", alt_set: "Ayvi settings", alt_theme: "Appearance settings: theme and colour", alt_light: "Group chat in the light theme",
+    i_h: "Install in 3 steps", i_p: "It takes less than a minute.",
+    inv_t: "A friend invited you", inv_p: "When you sign up, enter this ID in the “Invite ID” field. The chat will open by itself.", inv_b: "Copy ID", inv_ok: "Copied ✓", inv_no: "Select the ID manually",
+    st1t: "Download", st1d: "Tap “Download for Android”. The file is saved to your phone.",
+    st2t: "Allow", st2d: "Open the file. If your phone asks to allow installs from unknown sources, allow it.",
+    st3t: "Open", st3d: "Launch Ayvi, sign up and find your friend by name or ID.",
+    note: "Ayvi is not on Google Play yet. Download the file only from this page. Later updates arrive inside the app itself.",
+    qr: "On a computer? Scan with your phone camera.",
+    p_h: "Privacy", p_p: "Only the members of a chat can see it. For extra protection there is an app lock (PIN or fingerprint) and secret chats hidden behind a separate PIN. The full privacy policy will be published on this page before the Google Play release.",
+    fin: "Your friends are waiting in Ayvi", foot: "A messenger for being together"
+  }
+};
+
+const $$ = (s) => Array.prototype.slice.call(document.querySelectorAll(s));
+function setLang(l) {
+  if (!T[l]) l = 'uz';
+  const d = T[l];
+  document.documentElement.lang = l;
+  $$('[data-i]').forEach((e) => { const k = e.getAttribute('data-i'); if (d[k] == null) return; if (e.hasAttribute('data-h')) e.innerHTML = d[k]; else e.textContent = d[k]; });
+  $$('[data-i-alt]').forEach((e) => { const k = e.getAttribute('data-i-alt'); if (d[k]) e.alt = d[k]; });
+  document.title = d.title;
+  const m = document.querySelector('meta[name="description"]'); if (m) m.content = d.desc;
+  $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === l)));
+  window.__lang = l;
+  try { localStorage.setItem('ayvi-site-lang', l); } catch (e) { /* hech narsa */ }
+}
+$$('.lang button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
+let start = 'uz';
+try { start = localStorage.getItem('ayvi-site-lang') || ''; } catch (e) { start = ''; }
+if (!start) { const n = (navigator.language || 'uz').slice(0, 2).toLowerCase(); start = n === 'ru' ? 'ru' : n === 'en' ? 'en' : 'uz'; }
+setLang(start);
+
+/* ---------- taklif ID (?c=XXXXXXXX) ---------- */
+const q = new URLSearchParams(location.search).get('c') || '';
+const code = q.toUpperCase().replace(/[^A-Z0-9]/g, '');
+if (code.length === 8) {
+  document.getElementById('invite').hidden = false;
+  const shown = code.slice(0, 4) + '-' + code.slice(4);
+  document.getElementById('inviteId').textContent = shown;
+  document.getElementById('cp').addEventListener('click', async (e) => {
+    const d = T[window.__lang || 'uz'];
+    try { await navigator.clipboard.writeText(shown); e.target.textContent = d.inv_ok; } catch (x) { e.target.textContent = d.inv_no; }
+  });
+}
+
+/* ---------- QR (kompyuterda) ---------- */
+try {
+  const base = /^https?:$/.test(location.protocol) ? location.origin + location.pathname : 'https://ayviapp.github.io/';
+  drawQr(document.getElementById('qr'), base + (code.length === 8 ? '?c=' + code : ''), 170);
+} catch (e) { document.getElementById('desk').hidden = true; }
+
+/* ---------- galereya o'qlari ---------- */
+const gal = document.getElementById('gal');
+const step = () => Math.min(gal.clientWidth * 0.8, 460);
+document.getElementById('gp').addEventListener('click', () => gal.scrollBy({ left: -step(), behavior: 'smooth' }));
+document.getElementById('gn').addEventListener('click', () => gal.scrollBy({ left: step(), behavior: 'smooth' }));
+
+/* ---------- scroll'da paydo bo'lish ---------- */
+const rv = $$('.rv');
+if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const io = new IntersectionObserver((es) => es.forEach((x) => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  rv.forEach((e, i) => { e.style.transitionDelay = (i % 4) * 60 + 'ms'; io.observe(e); });
+} else rv.forEach((e) => e.classList.add('in'));
+</script>
+</body>
+</html>
